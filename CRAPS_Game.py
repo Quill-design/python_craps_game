@@ -11,14 +11,18 @@ def load_money():
     except(FileNotFoundError,ValueError):
         return 1000
 
+def roll_dice():
+    return random.randint(1,7) + random.randint(1,7)
+
 bankroll = load_money()
 while True:
     # 下注并判断是否下注》余额
     while True:
+        bet = 0
         print(f'您剩余金额为{bankroll}')
         try:
             bet = int(input('请下注：'))
-        except(ValueError):
+        except ValueError:
             print('下注失败')
             continue
         if bet > bankroll:
@@ -27,8 +31,6 @@ while True:
         else:
             break
     # 第一次投出7，11则获胜 ，2，3，12则判负  若没有则继续投下一轮  随后投出第一次投出的数字时获胜，投出7时判负
-    def roll_dice():
-        return random.randint(1,7) + random.randint(1,7)
     first_roll = roll_dice()
     game_result = True
     print(f'玩家投出了{first_roll}点')
